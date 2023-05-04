@@ -334,7 +334,7 @@ export class RecommendationWebView implements WebviewViewProvider {
               return
             }
             this.handleApplySuggestion(input, initData)
-
+            commands.executeCommand('metabob.endorseSuggestion', {id: initData.id, showMessage: false});
             break
           }
           case 'applyRecomendation': {
@@ -346,6 +346,7 @@ export class RecommendationWebView implements WebviewViewProvider {
               return
             }
             this.handleApplyRecomendation(input, initData)
+            commands.executeCommand('metabob.endorseSuggestion', {id: initData.id, showMessage: false});
             break
           }
           case 'onEndorseSuggestionClicked': {

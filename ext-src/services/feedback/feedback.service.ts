@@ -10,7 +10,7 @@ class FeedbackService extends ApiServiceBase {
   async discardSuggestion(payload: IFeedbackSuggestion) {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${payload.sessionToken}`
+      'Authorization': `Bearer ${payload.sessionToken}`
     }
 
     const response = await this.post<CreateSessionResponse>(
@@ -20,7 +20,7 @@ class FeedbackService extends ApiServiceBase {
         discarded: true,
         endorsed: false
       },
-      headers
+      {headers: headers}
     )
 
     return response
@@ -29,7 +29,7 @@ class FeedbackService extends ApiServiceBase {
   async endorseSuggestion(payload: IFeedbackSuggestion) {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${payload.sessionToken}`
+      'Authorization': `Bearer ${payload.sessionToken}`
     }
 
     const response = await this.post<CreateSessionResponse>(
@@ -39,7 +39,7 @@ class FeedbackService extends ApiServiceBase {
         discarded: false,
         endorsed: true
       },
-      headers
+      {headers: headers}
     )
 
     return response

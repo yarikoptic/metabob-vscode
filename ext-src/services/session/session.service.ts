@@ -32,7 +32,7 @@ class SessionService extends ApiServiceBase {
   async deleteUserSession(sessionToken: string) {
     const response = await this.delete('/session', {
       headers: {
-        Authorization: `Bearer ${sessionToken}`
+        'Authorization': `Bearer ${sessionToken}`
       }
     })
 
@@ -48,7 +48,7 @@ class SessionService extends ApiServiceBase {
   async getUserSession(sessionToken: string) {
     const response = await this.get<getUserSessionResponse>('/session', {
       headers: {
-        Authorization: `Bearer ${sessionToken}`
+        'Authorization': `Bearer ${sessionToken}`
       }
     })
 

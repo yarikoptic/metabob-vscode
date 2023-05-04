@@ -6,7 +6,7 @@ import { SessionState } from '../store/session.state'
 export function activateEndorseCommand(context: vscode.ExtensionContext, _debug?: vscode.OutputChannel) {
   const command = CONSTANTS.endorseSuggestionCommand
 
-  const commandHandler = async (args: { id: string }) => {
+  const commandHandler = async (args: { id: string, showMessage: boolean | undefined }) => {
     const session = new SessionState(context).get()?.value
     if (session) {
       feedbackService
@@ -16,11 +16,15 @@ export function activateEndorseCommand(context: vscode.ExtensionContext, _debug?
         })
         .then(() => {
           _debug?.appendLine(`Metabob: Endorsed Problem With ${args.id}`)
-          vscode.window.showInformationMessage(CONSTANTS.endorseCommandSuccessMessage)
+          if (args?.showMessage ?? true) {
+            vscode.window.showInformationMessage(CONSTANTS.endorseCommandSuccessMessage)
+          }
         })
         .catch(() => {
           _debug?.appendLine(`Metabob: Error Endorsing Problem With ${args.id}`)
-          vscode.window.showErrorMessage(CONSTANTS.endorseCommandErrorMessage)
+          if (args?.showMessage ?? true) {
+            vscode.window.showErrorMessage(CONSTANTS.endorseCommandErrorMessage)
+          }
         })
     }
   }
